@@ -22,6 +22,17 @@ function processData(callback) {
     const card = document.createElement("div");
     card.classList.add("cards");
     body.appendChild(card);
+    const img = document.createElement('img');
+    const baseUrl = "https://cms.mpdev.nl";
+    if(element.attributes.image != null) {
+
+      // const path = element.attributes.image.data.attributes.url;
+      // console.log(path)
+    }
+    // const imageUrl = `${baseUrl}${path}`
+
+    // img.setAttribute(`src`, imageUrl)
+
     const title = document.createElement("h1");
     title.innerText = element.attributes.title;
     card.appendChild(title);
@@ -32,7 +43,6 @@ function processData(callback) {
     const activity = document.createElement("span");
     activity.classList.add("activity");
     card.appendChild(activity);
-
     if (element.attributes.activity) {
       activity.classList.remove("activity-inactive");
       activity.classList.add("activity-active");
@@ -40,7 +50,17 @@ function processData(callback) {
       activity.classList.remove("activity-active");
       activity.classList.add("activity-inactive");
     }
-    console.log(element.attributes.project_categories.data);
+    const categories = element.attributes.project_categories.data;
+    const tag = document.createElement("ul");
+    if(categories != null) {
+      tag.classList.add("languages")
+      categories.forEach(element => {
+        const listItem = document.createElement("li")
+        listItem.innerText = element.attributes.tag;
+        tag.appendChild(listItem);
+      });
+      card.appendChild(tag);
+    }
   });
 }
 
