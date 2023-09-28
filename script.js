@@ -12,7 +12,6 @@ async function fetchData() {
   const data = await response.json();
   return data;
 }
-
 function processData(callback) {
   const arr = callback.data;
 
@@ -22,16 +21,14 @@ function processData(callback) {
     const card = document.createElement("div");
     card.classList.add("cards");
     body.appendChild(card);
-    const img = document.createElement('img');
-    const baseUrl = "https://cms.mpdev.nl";
-    if(element.attributes.image != null) {
-
-      // const path = element.attributes.image.data.attributes.url;
-      // console.log(path)
+    if (element.attributes.image.data != null) {
+      const img = document.createElement("img");
+      const baseUrl = "https://cms.mpdev.nl";
+      const path = element.attributes.image.data.attributes.url;
+      const imageUrl = `${baseUrl}${path}`;
+      img.setAttribute(`src`, imageUrl);
+      card.appendChild(img);
     }
-    // const imageUrl = `${baseUrl}${path}`
-
-    // img.setAttribute(`src`, imageUrl)
 
     const title = document.createElement("h1");
     title.innerText = element.attributes.title;
@@ -52,10 +49,10 @@ function processData(callback) {
     }
     const categories = element.attributes.project_categories.data;
     const tag = document.createElement("ul");
-    if(categories != null) {
-      tag.classList.add("languages")
-      categories.forEach(element => {
-        const listItem = document.createElement("li")
+    if (categories != null) {
+      tag.classList.add("languages");
+      categories.forEach((element) => {
+        const listItem = document.createElement("li");
         listItem.innerText = element.attributes.tag;
         tag.appendChild(listItem);
       });
