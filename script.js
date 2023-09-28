@@ -19,7 +19,7 @@ function processData(callback) {
     console.log(element);
     const body = document.querySelector("body");
     const card = document.createElement("div");
-    card.classList.add("cards");
+    card.classList.add("card");
     body.appendChild(card);
     if (element.attributes.image.data != null) {
       const img = document.createElement("img");
@@ -27,19 +27,24 @@ function processData(callback) {
       const path = element.attributes.image.data.attributes.url;
       const imageUrl = `${baseUrl}${path}`;
       img.setAttribute(`src`, imageUrl);
+      img.setAttribute('alt', 'screenshot-website')
       card.appendChild(img);
     }
 
-    const title = document.createElement("h1");
+    const article = document.createElement('article');
+    article.classList.add('article-cards')
+    card.appendChild(article);
+
+    const title = document.createElement("h2");
     title.innerText = element.attributes.title;
-    card.appendChild(title);
+    article.appendChild(title);
     const description = document.createElement("p");
     description.classList.add("description");
     description.innerHTML = element.attributes.description;
-    card.appendChild(description);
+    article.appendChild(description);
     const activity = document.createElement("span");
     activity.classList.add("activity");
-    card.appendChild(activity);
+    article.appendChild(activity);
     if (element.attributes.activity) {
       activity.classList.remove("activity-inactive");
       activity.classList.add("activity-active");
